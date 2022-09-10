@@ -1,0 +1,25 @@
+{
+  "name": "clean-architecture-typescript-todo-list",
+  "version": "0.0.0",
+  "description": "An example of clean architecture in typescript when a todo list is created, on web browser.",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bellphegorr/clean-architecture-typescript-todo-list.git"
+  },
+  "author": "José Ronaldo de Oliveira Júnior",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bellphegorr/clean-architecture-typescript-todo-list/issues"
+  },
+  "homepage": "https://github.com/Bellphegorr/clean-architecture-typescript-todo-list#readme",
+  "devDependencies": {
+    "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "@types/node": "^18.7.16"
+  }
+}
