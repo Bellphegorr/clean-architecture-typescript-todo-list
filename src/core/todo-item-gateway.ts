@@ -1,3 +1,5 @@
 import { TodoItem } from "./todo-item";
 
-export interface TodoItemGateway {}
+export interface TodoItemGateway {
+  save(task: string): number;
+}
