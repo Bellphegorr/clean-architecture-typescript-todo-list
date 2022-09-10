@@ -1,12 +1,23 @@
 import { TodoItem } from "@/core/todo-item";
 import { TodoItemGateway } from "@/core/todo-item-gateway";
 
+type output = {
+  id: string;
+  task: string;
+  complete: boolean;
+};
+
 class CreateTodoItemUseCase {
   constructor(private todoItemGateway: TodoItemGateway) {}
 
-  execute(task: string = "") {
-    let todoItemId = this.todoItemGateway.save(task);
-    return todoItemId;
+  execute(task: string = ""): output {
+    let newTodoItem = new TodoItem(task, false);
+    this.todoItemGateway.save(newTodoItem);
+    return {
+      id: newTodoItem.getId(),
+      task: task,
+      complete: false,
+    };
   }
 }
 
@@ -29,17 +40,17 @@ describe("CreateTodoItemUseCase", () => {
     let useCase = new CreateTodoItemUseCase(mockTodoItemGateway);
     let task = "Buy Cheese";
     useCase.execute(task);
-    expect(mockTodoItemGateway.save).toBeCalledWith(task);
+    expect((mockTodoItemGateway.save as jest.Mock).mock.calls.length).toBe(1);
   });
 
-  it("should return a todo item with the correct id", () => {
+  it("should call todoItemGateway.save with correct parameters", () => {
     let useCase = new CreateTodoItemUseCase(mockTodoItemGateway);
-    (mockTodoItemGateway.save as jest.Mock)
-      .mockReturnValueOnce(1)
-      .mockReturnValueOnce(2);
-    let receivedTodoItem = useCase.execute();
-    let receivedTodoItem2 = useCase.execute();
-    expect(receivedTodoItem).toEqual(1);
-    expect(receivedTodoItem2).toEqual(2);
+    let task = "Buy Cheese";
+    let { id } = useCase.execute(task);
+    expect((mockTodoItemGateway.save as jest.Mock).mock.calls[0][0]).toEqual({
+      complete: false,
+      id: id,
+      task: "Buy Cheese",
+    });
   });
 });

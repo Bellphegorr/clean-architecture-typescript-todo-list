@@ -1,15 +1,21 @@
+import { randomUUID } from "crypto";
+
 export class TodoItem {
-  constructor(
-    private id: number,
-    private task: string,
-    private complete: boolean = false
-  ) {}
+  private id: string;
+
+  constructor(private task: string, private complete: boolean = false) {
+    this.id = randomUUID();
+  }
+
+  getId() {
+    return this.id;
+  }
 
   completeTask() {
     this.complete = true;
   }
 
   printDetails() {
-    return `${this.id} ${this.task}${this.complete ? " (complete)" : ""}`;
+    return `${this.task}${this.complete ? " (complete)" : ""}`;
   }
 }
