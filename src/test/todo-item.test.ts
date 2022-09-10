@@ -1,4 +1,4 @@
-import { TodoItem } from "../core/todo-item";
+import { TodoItem } from "@/core/todo-item";
 
 describe("TodoItem", () => {
   it("should create an instance", () => {
