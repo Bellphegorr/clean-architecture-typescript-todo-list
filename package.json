@@ -4,8 +4,8 @@
   "description": "An example of clean architecture in typescript when a todo list is created, on web browser.",
   "main": "main.js",
   "scripts": {
-    "start": "tsc src/main.ts",
-    "test": "jest"
+    "start": "ts-node src/main.ts",
+    "test": "jest --watchAll"
   },
   "repository": {
     "type": "git",
