@@ -3,10 +3,11 @@ import { TodoItem } from "@/core/todo-item";
 import { TodoItemGateway } from "@/core/todo-item-gateway";
 
 export class TodoItemGatewayImpl implements TodoItemGateway {
-  constructor(private gatewayProtocol: GatewayProtocol) {}
+  constructor(private gatewayAdapter: GatewayProtocol) {}
   save(todoItem: TodoItem) {
     try {
-      this.gatewayProtocol.save(todoItem);
+      debugger;
+      this.gatewayAdapter.save(todoItem);
       return true;
     } catch (error) {
       console.log(error);
@@ -16,9 +17,18 @@ export class TodoItemGatewayImpl implements TodoItemGateway {
 }
 
 describe("TodoItemGatewayImpl", () => {
-  let mockGatewayProtocol: GatewayProtocol;
+  let mockGatewayProtocol: GatewayProtocol = {
+    save: jest.fn(),
+  };
 
   it("should create an instance", () => {
     expect(new TodoItemGatewayImpl(mockGatewayProtocol)).toBeTruthy();
+  });
+
+  it("should save a todo item", () => {
+    const todoItemGateway = new TodoItemGatewayImpl(mockGatewayProtocol);
+    const todoItem = new TodoItem("Test", false);
+    const result = todoItemGateway.save(todoItem);
+    expect(result).toBe(true);
   });
 });
