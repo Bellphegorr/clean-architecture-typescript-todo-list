@@ -1,17 +1,14 @@
-import { GatewayProtocol as GatewayAdapter } from "@/core/gateway-adapter";
-import { TodoItem } from "@/core/todo-item";
+import { output } from "@/app/create-todo-item-use-case";
 import { TodoItemGateway } from "@/core/todo-item-gateway";
 
 export class TodoItemGatewayImpl implements TodoItemGateway {
-  constructor(private gatewayAdapter: GatewayAdapter) {}
-  save(todoItem: TodoItem) {
-    try {
-      debugger;
-      this.gatewayAdapter.save(todoItem);
-      return true;
-    } catch (error) {
-      console.log(error);
+  save(todoItem: output) {
+    const todoItemToString = JSON.stringify(todoItem);
+    const checkIfTodoItemExist = localStorage.getItem(todoItem.id);
+    if (checkIfTodoItemExist) {
       return false;
     }
+    localStorage.setItem(todoItem.id, todoItemToString);
+    return true;
   }
 }

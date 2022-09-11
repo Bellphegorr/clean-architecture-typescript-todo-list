@@ -12,11 +12,12 @@ export class CreateTodoItemUseCase {
 
   execute(task: string = ""): output {
     let newTodoItem = new TodoItem(task, false);
-    this.todoItemGateway.save(newTodoItem);
-    return {
+    let output = {
       id: newTodoItem.getId(),
       task: task,
       complete: false,
     };
+    this.todoItemGateway.save(output);
+    return output;
   }
 }

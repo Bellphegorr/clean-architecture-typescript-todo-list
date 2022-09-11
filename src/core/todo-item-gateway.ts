@@ -1,5 +1,5 @@
-import { TodoItem } from "./todo-item";
+import { output } from "@/app/create-todo-item-use-case";
 
 export interface TodoItemGateway {
-  save(todoItem: TodoItem): boolean;
+  save(todoItem: output): boolean;
 }
