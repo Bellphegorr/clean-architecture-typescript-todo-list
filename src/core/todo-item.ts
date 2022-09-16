@@ -1,10 +1,8 @@
-import { randomUUID } from "crypto";
-
 export class TodoItem {
   private id: string;
 
   constructor(private task: string, private complete: boolean = false) {
-    this.id = randomUUID();
+    this.id = new Date().toISOString();
   }
 
   getId() {

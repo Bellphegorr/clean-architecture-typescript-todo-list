@@ -16,3 +16,5 @@ class Main {
 }
 
 export const main = new Main();
+document.getElementsByTagName("button")[0].innerHTML = "Hello World";
+globalThis.main = main;
